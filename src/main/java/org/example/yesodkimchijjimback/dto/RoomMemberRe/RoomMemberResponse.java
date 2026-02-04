@@ -1,4 +1,4 @@
-package spring_room.dto.RoomMemberRe;
+package org.example.yesodkimchijjimback.dto.RoomMemberRe;
 
 import lombok.Builder;
 import lombok.Data;

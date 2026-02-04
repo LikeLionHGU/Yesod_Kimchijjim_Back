@@ -1,4 +1,4 @@
-package spring_room.service;
+package org.example.yesodkimchijjimback.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class RoomMemberService {
+
 
 
 

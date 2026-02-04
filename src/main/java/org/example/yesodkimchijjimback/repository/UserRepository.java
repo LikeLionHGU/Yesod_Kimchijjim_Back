@@ -1,7 +1,7 @@
-package spring_room.repository;
+package org.example.yesodkimchijjimback.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import spring_room.domain.User;
+import org.example.yesodkimchijjimback.domain.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 }

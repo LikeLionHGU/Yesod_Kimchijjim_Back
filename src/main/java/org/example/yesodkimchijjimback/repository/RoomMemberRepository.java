@@ -1,7 +1,7 @@
-package spring_room.repository;
+package org.example.yesodkimchijjimback.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import spring_room.domain.RoomMember;
+import org.example.yesodkimchijjimback.domain.RoomMember;
 
 public interface RoomMemberRepository extends JpaRepository<RoomMember, Long> {
     long countByMember(Room room);

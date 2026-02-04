@@ -1,4 +1,4 @@
-package spring_room.dto.UserRe;
+package org.example.yesodkimchijjimback.dto.UserRe;
 
 import lombok.Data;
 

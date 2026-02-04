@@ -1,10 +1,10 @@
-package spring_room.controller;
+package org.example.yesodkimchijjimback.controller;
 
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import spring_room.service.UserService;
+import org.example.yesodkimchijjimback.service.UserService;
 
 @RestController
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package spring_room.domain;
+package org.example.yesodkimchijjimback.domain;
 
 
 import jakarta.persistence.*;
@@ -19,7 +19,6 @@ public class RoomMember {
 
     private String name;
     private Long roomUserId;
-    private boolean isHost;
 
     boolean isHost(){
         return this.roomUserId==1;
@@ -30,7 +29,7 @@ public class RoomMember {
     @JoinColumn(name = "room_id")
     private Room room;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 

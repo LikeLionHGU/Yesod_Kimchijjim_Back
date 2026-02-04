@@ -1,12 +1,12 @@
-package spring_room.service;
+package org.example.yesodkimchijjimback.service;
 
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import spring_room.domain.RoomMember;
-import spring_room.domain.User;
-import spring_room.dto.UserRe.UserRequest;
-import spring_room.repository.RoomMemberRepository;
+import org.example.yesodkimchijjimback.domain.RoomMember;
+import org.example.yesodkimchijjimback.domain.User;
+import org.example.yesodkimchijjimback.dto.UserRe.UserRequest;
+import org.example.yesodkimchijjimback.repository.RoomMemberRepository;
 
 @Service
 @RequiredArgsConstructor
