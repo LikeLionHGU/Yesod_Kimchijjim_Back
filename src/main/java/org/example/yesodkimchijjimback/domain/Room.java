@@ -2,7 +2,11 @@ package org.example.yesodkimchijjimback.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.checkerframework.checker.units.qual.C;
 import org.example.yesodkimchijjimback.dto.room.RoomRequest;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 @Entity
@@ -25,6 +29,13 @@ public class Room {
 
     @Column(nullable = false)
     private int maxPeople;
+
+    @Column(nullable = false)
+    private int currentPeople;
+
+    @OneToMany(mappedBy = "room", cascade = CascadeType.ALL)
+    private List<RoomMember> members = new ArrayList<>();
+
 
     public static Room fromEntity(RoomRequest roomRequest){
         String randomCode;

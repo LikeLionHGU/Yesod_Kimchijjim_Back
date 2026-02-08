@@ -18,13 +18,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String googleToken;
+    @Column(nullable = false, length = 30)
+    private String name;
+
+    @Column(nullable = false, unique = true, length = 50)
+    private String email;
+
+    @Column(unique = true)
+    private String googleSub;
 
     @OneToMany (
-                mappedBy = "User",
+                mappedBy = "user",
                 fetch = FetchType.LAZY,
                 cascade = {CascadeType.ALL}
     )
+    private List<RoomMember> roomMembers = new ArrayList<>();
 
-    private List<User> user = new ArrayList<>();
+    public void updateName(String name) {
+        this.name = name;
+    }
+
+    public void connectGoogle(String googleSub) {
+        this.googleSub = googleSub;
+    }
 }
