@@ -5,6 +5,6 @@ import lombok.Data;
 @Data
 public class RoomRequest {
     private String roomName;
-    // private String roomCode;
     private int maxPeople;
+    private String hostNickname;
 }

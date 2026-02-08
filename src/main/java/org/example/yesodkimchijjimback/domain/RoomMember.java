@@ -10,20 +10,17 @@ import lombok.*;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class RoomMember {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private Long roomUserId;
+    @Column(nullable = false)
+    private String nickname;
 
-    boolean isHost(){
-        return this.roomUserId==1;
-    }
-
+    @Column(nullable = false)
+    private boolean isHost;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
