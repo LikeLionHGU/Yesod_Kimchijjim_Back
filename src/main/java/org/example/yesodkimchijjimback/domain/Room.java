@@ -2,7 +2,6 @@ package org.example.yesodkimchijjimback.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.checkerframework.checker.units.qual.C;
 import org.example.yesodkimchijjimback.dto.room.RoomRequest;
 
 import java.util.ArrayList;
@@ -33,13 +32,20 @@ public class Room {
     @Column(nullable = false)
     private int currentPeople;
 
+    @Builder.Default
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<RoomMember> members = new ArrayList<>();
 
+    @Builder.Default
     @OneToMany(mappedBy = "room", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Opinion> opinions = new ArrayList<>();
 
+    @ElementCollection
+    @Builder.Default
     private List<String> allVote = new ArrayList<>();
+
+    @Builder.Default
+    private String status = "MODIFYING"; // 방 전체 상태
 
     public void addVote(String voteString){
         this.allVote.add(voteString);
@@ -60,10 +66,9 @@ public class Room {
                 .roomName(roomRequest.getRoomName())
                 .roomCode(randomCode)
                 .maxPeople(roomRequest.getMaxPeople())
+                .status("WAITING")
                 .build();
     }
-
-    private String status = "MODIFYING"; // 방 전체 상태
 
     public void update(RoomRequest roomRequest){ //방 이름이나 정보 변경
         this.roomName = roomRequest.getRoomName();
