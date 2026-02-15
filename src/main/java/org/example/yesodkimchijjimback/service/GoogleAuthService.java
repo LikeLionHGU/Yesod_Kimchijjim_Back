@@ -55,6 +55,12 @@ public class GoogleAuthService {
 
     // id_token이 진짜인지 검증
     private GoogleIdToken.Payload verify(String idTokenString) {
+
+        System.out.println(">>> CHECK - Backend Client ID: [" + this.googleClientId + "]");
+
+        // 2. 전달받은 토큰의 앞부분 출력 (제대로 오는지 확인)
+        System.out.println(">>> CHECK - Received Token: [" + (idTokenString != null ? idTokenString.substring(0, 30) : "NULL") + "]");
+
         try {
             //GoogleIdTokenVerifier: 구글이 제공하는 검증 도구
             GoogleIdTokenVerifier verifier =

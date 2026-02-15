@@ -25,6 +25,8 @@ public class OpinionService {
     private final OpinionRepository opinionRepository;
     private final RoomMemberRepository roomMemberRepository;
 
+    private final WebPushService webPushService;
+
     @Transactional
     public OpinionResponse createOpinion(Long userId, OpinionRequest opinionRequest){
         User user = userRepository.findById(userId)
@@ -42,6 +44,16 @@ public class OpinionService {
                 .user(user)
                 .nickname(roomMember.getNickname())
                 .build());
+
+        List<RoomMember> members = roomMemberRepository.findAllByRoomRoomCode(opinionRequest.getRoomCode());
+        List<Long> receiverIds = members.stream()
+                .map(member -> member.getUser().getId())
+                .filter(id -> !id.equals(userId))
+                .toList();
+
+        if(!receiverIds.isEmpty()){
+            webPushService.sendNotificationToMembers(receiverIds,"타이틀" , opinionRequest.getContent());
+        }
 
         return OpinionResponse.fromResponse(opinion);
     }

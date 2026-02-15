@@ -30,7 +30,7 @@ public class RoomController {
         return ResponseEntity.status(HttpStatus.CREATED).body(roomResponse);
     }
 
-    @GetMapping("/{roomCode}")
+    @GetMapping("/{roomCode}/info")
     public ResponseEntity<Map<String, Object>> read(
             @PathVariable String roomCode,
             @SessionAttribute(name = GoogleAuthController.SESSION_USER_ID, required = false)Long userId){
@@ -55,7 +55,7 @@ public class RoomController {
     }
 
     @DeleteMapping("/{roomCode}")
-    public ResponseEntity<RoomResponse> delete(
+    public ResponseEntity<Void> delete(
             @PathVariable String roomCode,
             @SessionAttribute(name = GoogleAuthController.SESSION_USER_ID, required = false)Long userId){
         roomService.deleteRoom(roomCode, userId);

@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.example.yesodkimchijjimback.domain.RoomMember;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -19,4 +20,6 @@ public interface RoomMemberRepository extends JpaRepository<RoomMember, Long> {
     Optional<RoomMember> findByUserAndRoom(User user, Room room);
 
     Optional<RoomMember> findByRoomAndUserId(Room room, Long userId);
+
+    List<RoomMember> findAllByRoomRoomCode(String roomCode);
 }
