@@ -17,4 +17,6 @@ public interface RuleRepository extends JpaRepository<Rule, Long> {
     Optional<Rule> findByRoomAndQuestionId(Room room, Long questionId);
 
     Optional<Rule> findByIdAndRoom(Long id, Room room);
+
+    void deleteAllByRoom(Room room);
 }

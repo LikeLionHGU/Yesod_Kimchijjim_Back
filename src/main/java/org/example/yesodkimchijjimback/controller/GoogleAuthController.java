@@ -1,5 +1,7 @@
 package org.example.yesodkimchijjimback.controller;
 
+
+import org.example.yesodkimchijjimback.domain.RoomMember;
 import org.example.yesodkimchijjimback.domain.User;
 
 import jakarta.servlet.http.HttpSession;
@@ -7,15 +9,20 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.example.yesodkimchijjimback.dto.login.GoogleLoginRequest;
 import org.example.yesodkimchijjimback.dto.login.LoginResponse;
+import org.example.yesodkimchijjimback.repository.RoomMemberRepository;
 import org.example.yesodkimchijjimback.service.GoogleAuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 public class GoogleAuthController {
     private final GoogleAuthService googleAuthService;
+    private final RoomMemberRepository roomMemberRepository;
+
     public static final String SESSION_USER_ID = "LOGIN_USER_ID";
 
     @PostMapping("/google")
@@ -29,8 +36,15 @@ public class GoogleAuthController {
         //  세션에 로그인 정보 저장
         session.setAttribute(SESSION_USER_ID, user.getId());
 
+        List<RoomMember> roomMembers = roomMemberRepository.findAllByUser(user);
+
+        System.out.println(">>> [DEBUG] 로그인 유저 ID: " + user.getId());
+        System.out.println(">>> [DEBUG] 찾은 방 개수: " + roomMembers.size());
+
+        String roomCode = roomMembers.isEmpty() ? null : roomMembers.get(0).getRoom().getRoomCode();
+
         return ResponseEntity.ok(
-                new LoginResponse(user.getId(), user.getEmail(), user.getName())
+                new LoginResponse(user.getId(), user.getEmail(), user.getName(), roomCode)
         );
     }
 
