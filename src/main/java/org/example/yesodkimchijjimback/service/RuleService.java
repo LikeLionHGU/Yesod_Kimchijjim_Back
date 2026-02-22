@@ -197,7 +197,7 @@ public class RuleService {
     public boolean isHost(Room room, Long userId) {
         return roomMemberRepository.findByRoomAndUserId(room, userId)
                 .map(RoomMember::isHost)
-                .orElseThrow(()->new IllegalArgumentException("찾는 사람이 없습니다."));
+                .orElse(false);
     }
 
     @Transactional
