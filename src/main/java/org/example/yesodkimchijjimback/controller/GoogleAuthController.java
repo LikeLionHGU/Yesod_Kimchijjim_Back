@@ -38,9 +38,6 @@ public class GoogleAuthController {
 
         List<RoomMember> roomMembers = roomMemberRepository.findAllByUser(user);
 
-        System.out.println(">>> [DEBUG] 로그인 유저 ID: " + user.getId());
-        System.out.println(">>> [DEBUG] 찾은 방 개수: " + roomMembers.size());
-
         String roomCode = roomMembers.isEmpty() ? null : roomMembers.get(0).getRoom().getRoomCode();
 
         return ResponseEntity.ok(
