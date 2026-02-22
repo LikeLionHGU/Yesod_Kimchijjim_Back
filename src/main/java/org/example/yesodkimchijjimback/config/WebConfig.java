@@ -14,6 +14,7 @@ public class WebConfig implements WebMvcConfigurer {
                         "https://yesodkimchijjim.shop",
                         "https://yesod-kimchijjim-front.vercel.app",
                         "https://www.yesodkimchijjim.shop")
+            
                 .allowedMethods("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS")
                 .allowedHeaders("*")
                 .allowCredentials(true)
