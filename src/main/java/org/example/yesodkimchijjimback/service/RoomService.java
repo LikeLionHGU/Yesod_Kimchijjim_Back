@@ -9,9 +9,7 @@ import org.example.yesodkimchijjimback.dto.UserRe.UserJoinRequest;
 import org.example.yesodkimchijjimback.dto.room.RoomRequest;
 import org.example.yesodkimchijjimback.dto.room.RoomResponse;
 import org.example.yesodkimchijjimback.dto.room.WaitingRoomResponse;
-import org.example.yesodkimchijjimback.repository.RoomMemberRepository;
-import org.example.yesodkimchijjimback.repository.RoomRepository;
-import org.example.yesodkimchijjimback.repository.UserRepository;
+import org.example.yesodkimchijjimback.repository.*;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -21,6 +19,8 @@ public class RoomService {
     private final RoomRepository roomRepository;
     private final RoomMemberRepository roomMemberRepository;
     private final UserRepository userRepository;
+    private final OpinionRepository opinionRepository;
+    private final RuleRepository ruleRepository;
 
     @Transactional
     public RoomResponse createRoom(RoomRequest roomRequest, Long userId){
@@ -77,12 +77,23 @@ public class RoomService {
         if(!roomMember.isHost()){
             throw new IllegalStateException("방장만 방을 삭제할 수 있습니다.");
         }
+        opinionRepository.deleteAllByRoom(room);
+        ruleRepository.deleteAllByRoom(room);
+
+        roomMemberRepository.deleteAllByRoom(room);
 
         roomRepository.delete(room);
     }
 
     @Transactional
     public void joinRoom(UserJoinRequest userJoinRequest, Long userId) {
+
+        System.out.println(">>> [DEBUG] joinRoom 진입 - userId: " + userId);
+
+        if (userId == null) {
+            System.out.println(">>> [ERROR] userId가 null입니다! 프론트에서 인증 정보가 안 넘어옴.");
+            throw new IllegalArgumentException("로그인이 필요합니다.");
+        }
 
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 유저입니다."));
