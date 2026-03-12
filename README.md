@@ -1,5 +1,5 @@
 # 잠깐만
-<span align="center"> <img src="https://github.com/LikeLionHGU/Yesod_Kimchijjim_Back/blob/main/src/READMEimg/images.png">
+<span align="center"> <img src="https://github.com/LikeLionHGU/Yesod_Kimchijjim_Back/blob/main/src/READMEimg/images.png"></span>
 **서로 다른 수면 성향 간 합의를 돕는 룸메이트 수면 소통 플랫폼**
 <img width="2560" height="1440" alt="" src="https://github.com/LikeLionHGU/Yesod_Kimchijjim_Back/blob/main/src/READMEimg/img0.svg" />
 ### API 명세서: https://www.notion.so/API-2fd081f8fd11805681ead6bdc04ffdf1?source=copy_link
